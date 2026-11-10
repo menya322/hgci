@@ -27,7 +27,13 @@
         ],
     ];
 
-    $programTones = ['teal', 'red', 'green', 'orange', 'yellow'];
+    $programTones = [
+        'education' => 'teal',
+        'health-nutrition' => 'red',
+        'livelihood' => 'green',
+        'food-relief' => 'orange',
+        'child-sponsorship' => 'yellow',
+    ];
 
     $impactStats = [
         ['label' => 'Children reached', 'value' => $settings['impact.children_reached'] ?? null],
@@ -278,7 +284,7 @@
                             :title="$program->title"
                             :description="$program->excerpt"
                             :icon="$program->icon ?? 'sparkles'"
-                            :tone="$programTones[$loop->index % count($programTones)]"
+                            :tone="$programTones[$program->slug] ?? 'teal'"
                         />
                     @endforeach
                 </div>
