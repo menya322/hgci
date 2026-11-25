@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@hasSection('title')@yield('title') | @endif{{ config('app.name') }}</title>
-
-    <meta name="description" content="@yield('meta_description', 'Hope In God Child Initiatives (HGCI) is a child sponsorship and Christian humanitarian aid organization transforming the lives of orphans and vulnerable children in Uganda.')">
+    @include('partials.seo')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +21,8 @@
     >Skip to content</a>
 
     @include('partials.header')
+
+    <x-flash />
 
     <main id="main-content" tabindex="-1" class="flex-1">
         @yield('content')

@@ -36,6 +36,8 @@
         eyebrow="What we do"
         title="Programs that meet children where they are"
         description="From education to food relief, our work is designed around the whole child and the community around them."
+        image="images/gallery/education-school-support/school-support-gathering.jpeg"
+        image-alt="Children holding hygiene supplies at an HGCI school support gathering"
         :breadcrumbs="[['label' => 'Our Programs']]"
     >
         <div class="flex flex-col gap-3 sm:flex-row">
@@ -43,7 +45,7 @@
                 <x-icon name="heart" class="size-5" />
                 Sponsor a child
             </x-button>
-            <x-button href="{{ url('/impact') }}" variant="outline" size="lg">
+            <x-button href="{{ url('/impact') }}" variant="outline-light" size="lg">
                 See our impact
                 <x-icon name="arrow-right" class="size-4" />
             </x-button>
@@ -92,6 +94,7 @@
                             :description="$program->excerpt"
                             :icon="$program->icon ?? 'sparkles'"
                             :tone="$programTones[$program->slug] ?? 'teal'"
+                            :image="\App\Support\ContentImages::program($program)"
                         />
                     @endforeach
                 </div>

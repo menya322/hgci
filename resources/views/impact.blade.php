@@ -84,14 +84,28 @@
 
             {{-- The fourth project was left blank in the HGCI brochure. --}}
             <div class="mt-14 rounded-lg border border-dashed border-line bg-surface p-6 sm:p-8">
-                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <x-badge tone="yellow">[ADD: fourth project]</x-badge>
-                        <p class="mt-3 font-display text-lg font-semibold text-ink">One more project to be confirmed</p>
-                        <p class="mt-1 max-w-2xl text-sm leading-relaxed text-muted">
-                            The HGCI brochure lists a fourth livelihood and relief project without a name. Its title,
-                            photos and outcomes will be added here once HGCI supplies them.
-                        </p>
+                <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+                        <div class="w-full shrink-0 overflow-hidden rounded-lg border border-line sm:w-48">
+                            <x-responsive-image
+                                src="images/projects/fourth-project.jpg"
+                                asset
+                                alt="Photo of the HGCI livelihood and relief project still to be confirmed."
+                                :width="800"
+                                :height="600"
+                                ratio="4/3"
+                                label="[ADD: project photo]"
+                            />
+                        </div>
+
+                        <div>
+                            <x-badge tone="yellow">[ADD: fourth project]</x-badge>
+                            <p class="mt-3 font-display text-lg font-semibold text-ink">One more project to be confirmed</p>
+                            <p class="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+                                The HGCI brochure lists a fourth livelihood and relief project without a name. Its title,
+                                photos and outcomes will be added here once HGCI supplies them.
+                            </p>
+                        </div>
                     </div>
 
                     <x-button href="{{ url('/contact') }}" variant="outline" class="shrink-0">
@@ -105,12 +119,25 @@
     {{-- How we work. --}}
     <section class="border-y border-brand-teal-dark bg-brand-teal-dark py-16 text-white lg:py-20">
         <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
-            <x-section-heading
-                eyebrow="How we work"
-                title="Community-led, transparent and accountable"
-                description="We promote the active participation of community members in fighting poverty, and we value transparency in everything we do."
-                tone="dark"
-            />
+            <div>
+                <x-section-heading
+                    eyebrow="How we work"
+                    title="Community-led, transparent and accountable"
+                    description="We promote the active participation of community members in fighting poverty, and we value transparency in everything we do."
+                    tone="dark"
+                />
+
+                <div class="mt-8 overflow-hidden rounded-lg border border-white/25 shadow-card">
+                    <x-responsive-image
+                        src="images/impact/community.jpg"
+                        asset
+                        alt="HGCI staff sitting with a family and their children outside their brick home."
+                        :width="1080"
+                        :height="810"
+                        ratio="4/3"
+                    />
+                </div>
+            </div>
 
             <div class="rounded-lg border border-white/25 bg-white/5 p-6 sm:p-8">
                 <p class="text-xs font-bold uppercase tracking-[0.16em] text-white/90">Our core values</p>

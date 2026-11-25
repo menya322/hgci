@@ -14,19 +14,39 @@
             'icon' => 'health',
             'tone' => 'bg-brand-teal text-white',
             'copy' => 'Awareness on health, nutrition and sanitation for clean, healthy homes.',
+            'image' => [
+                'src' => 'images/home/niche-health.jpg',
+                'alt' => 'Students sitting at a classroom desk with packets of sanitary pads in front of them.',
+                'width' => 400,
+                'height' => 400,
+            ],
         ],
         'Education' => [
             'icon' => 'academic-cap',
             'tone' => 'bg-brand-yellow text-ink',
             'copy' => 'Quality, competitive learning that reduces illiteracy among children.',
+            'image' => [
+                'src' => 'images/home/niche-education.jpg',
+                'alt' => 'A group of smiling students holding packets of soap in front of a school building.',
+                'width' => 400,
+                'height' => 400,
+            ],
         ],
         'Livelihood' => [
             'icon' => 'briefcase',
             'tone' => 'bg-brand-green text-ink',
             'copy' => 'Piggery, cow rearing and goat rearing projects that strengthen families.',
+            'image' => [
+                'src' => 'images/impact/community.jpg',
+                'alt' => 'A group of smiling students holding packets of soap in front of a school building.',
+                'width' => 400,
+                'height' => 400,
+            ],
         ],
     ];
 
+    // Static photos per program slug live in App\Support\ContentImages, so a
+    // real admin upload still wins and the placeholder stays otherwise.
     $programTones = [
         'education' => 'teal',
         'health-nutrition' => 'red',
@@ -46,68 +66,52 @@
 @section('meta_description', 'Hope In God Child Initiatives (HGCI) transforms the lives of orphans and vulnerable children in Uganda through child sponsorship, education, health, livelihood and food relief.')
 
 @section('content')
-    {{-- Hero: mission-first statement with the vision and mission panel. --}}
-    <section class="relative overflow-hidden bg-surface">
-        <div class="container-page grid items-center gap-12 py-14 lg:grid-cols-2 lg:py-24">
-            <div>
-                <p class="inline-flex items-center gap-2 rounded-md border border-line bg-surface-warm px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">
-                    <span class="size-2 rounded-full bg-brand-red" aria-hidden="true"></span>
-                    {{ $heroEyebrow }}
-                </p>
+    {{-- Hero: mission-first statement over a real HGCI photo. --}}
+    <x-hero-image
+        src="images/hero/home-hero.jpg"
+        asset
+        alt="Students gathered outdoors with HGCI staff during a school support visit."
+        :width="1600"
+        :height="900"
+        :eyebrow="$heroEyebrow"
+        :title="$heroTitle"
+        :description="$heroDescription"
+        overlay-class="bg-black/60"
+    >
+        <x-button href="{{ url('/sponsor') }}" size="lg">
+            <x-icon name="heart" class="size-5" />
+            Sponsor a child
+        </x-button>
+        <x-button href="{{ url('/donate') }}" variant="donate" size="lg">
+            Donate
+        </x-button>
+    </x-hero-image>
 
-                <h1 class="mt-6 max-w-xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
-                    {{ $heroTitle }}
-                </h1>
-
-                <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-                    {{ $heroDescription }}
-                </p>
-
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <x-button href="{{ url('/sponsor') }}" size="lg">
-                        <x-icon name="heart" class="size-5" />
-                        Sponsor a child
-                    </x-button>
-                    <x-button href="{{ url('/donate') }}" variant="donate" size="lg">
-                        Donate
-                    </x-button>
+    {{-- Vision and mission: kept directly below the hero on solid teal. --}}
+    <section class="border-b border-line bg-brand-teal-dark py-8 text-white" aria-label="Our vision and mission">
+        <div class="container-page grid gap-6 md:grid-cols-2 md:items-start">
+            <div class="flex items-start gap-3">
+                <span class="mt-2 h-1 w-8 shrink-0 rounded-full bg-brand-yellow" aria-hidden="true"></span>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90">Our vision</p>
+                    <p class="mt-1 font-display text-xl font-semibold leading-snug sm:text-2xl">{{ $vision }}</p>
                 </div>
-
-                <p class="mt-6 flex items-center gap-2 text-sm text-muted">
-                    <x-icon name="shield-check" class="size-5 shrink-0 text-brand-teal" />
-                    Community-based, transparent and accountable.
-                </p>
             </div>
 
-            <div class="relative overflow-hidden rounded-lg bg-brand-teal-dark p-8 text-white sm:p-10">
-                <div aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-brand-teal/60"></div>
-                <div aria-hidden="true" class="pointer-events-none absolute -bottom-14 -left-10 size-44 rounded-full bg-brand-teal/40"></div>
-
-                <div class="relative">
-                    <div class="flex items-center gap-3">
-                        <span class="h-1 w-8 rounded-full bg-brand-yellow" aria-hidden="true"></span>
-                        <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90">Our vision</p>
-                    </div>
-                    <p class="mt-4 font-display text-3xl font-semibold leading-tight">
-                        {{ $vision }}
-                    </p>
-
-                    <div class="my-6 h-px bg-white/20"></div>
-
+            <div class="flex items-start gap-3">
+                <span class="mt-2 h-1 w-8 shrink-0 rounded-full bg-brand-red" aria-hidden="true"></span>
+                <div>
                     <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90">Our mission</p>
-                    <p class="mt-2 text-lg leading-relaxed text-white/90">
-                        {{ $mission }}
-                    </p>
-
-                    <div class="mt-8 flex flex-wrap gap-2">
-                        @foreach ($niches as $niche)
-                            <span class="rounded-md border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white">
-                                {{ $niche }}
-                            </span>
-                        @endforeach
-                    </div>
+                    <p class="mt-1 text-base leading-relaxed text-white/90">{{ $mission }}</p>
                 </div>
             </div>
+        </div>
+
+        <div class="container-page mt-6">
+            <p class="flex items-center gap-2 text-sm text-white/85">
+                <x-icon name="shield-check" class="size-5 shrink-0 text-brand-yellow" />
+                Community based, transparent and accountable.
+            </p>
         </div>
     </section>
 
@@ -162,13 +166,24 @@
             <div>
                 <x-section-heading
                     eyebrow="Who we are"
-                    title="A community-based approach to caring for children"
+                    title="A community based approach to caring for children"
                     :description="$settings['about.who_we_are'] ?? null"
                 />
 
                 <p class="mt-5 max-w-xl leading-relaxed text-muted">
-                    {{ $settings['about.approach'] ?? 'HGCI employs a community-based approach in achieving its objectives by promoting active participation of community members in fighting poverty.' }}
+                    {{ $settings['about.approach'] ?? 'HGCI employs a community based approach in achieving its objectives by promoting active participation of community members in fighting poverty.' }}
                 </p>
+
+                <div class="mt-8 max-w-xl overflow-hidden rounded-lg border border-line bg-surface shadow-card">
+                    <x-responsive-image
+                        src="images/about/hgci-profile.jpeg"
+                        asset
+                        alt="Two-page spread from the HGCI organisational profile covering our vision, mission, core values and strategic areas of focus."
+                        :width="1080"
+                        :height="764"
+                        ratio="4/3"
+                    />
+                </div>
 
                 <div class="mt-6 flex flex-wrap gap-2">
                     @foreach ($coreValues as $value)
@@ -195,10 +210,28 @@
                             ];
                         @endphp
 
-                        <li class="flex gap-4">
-                            <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-lg {{ $detail['tone'] }}">
-                                <x-icon :name="$detail['icon']" class="size-6" />
-                            </span>
+                        <li class="flex items-center gap-4">
+                            @if (! empty($detail['image']))
+                                <div class="relative w-20 shrink-0 sm:w-24">
+                                    <div class="overflow-hidden rounded-lg border border-line">
+                                        <x-responsive-image
+                                            :src="$detail['image']['src']"
+                                            :alt="$detail['image']['alt']"
+                                            :width="$detail['image']['width']"
+                                            :height="$detail['image']['height']"
+                                            ratio="1/1"
+                                            asset
+                                        />
+                                    </div>
+                                    <span class="absolute -bottom-1.5 -right-1.5 inline-flex size-8 items-center justify-center rounded-full border-2 border-surface {{ $detail['tone'] }}">
+                                        <x-icon :name="$detail['icon']" class="size-4" />
+                                    </span>
+                                </div>
+                            @else
+                                <span class="inline-flex size-20 shrink-0 items-center justify-center rounded-lg border border-line sm:size-24 {{ $detail['tone'] }}">
+                                    <x-icon :name="$detail['icon']" class="size-8" />
+                                </span>
+                            @endif
                             <div>
                                 <p class="font-semibold text-ink">{{ $niche }}</p>
                                 @if ($detail['copy'])
@@ -222,11 +255,24 @@
         <section class="py-16 lg:py-24" aria-labelledby="featured-story-heading">
             <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
                 <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
-                    <x-media
-                        :src="$featuredPost->featured_image"
-                        :alt="$featuredPost->image_alt ?? $featuredPost->title"
-                        ratio="aspect-[4/3]"
-                    />
+                    @if ($featuredPost->featured_image)
+                        <x-responsive-image
+                            :src="$featuredPost->featured_image"
+                            :alt="$featuredPost->image_alt ?: $featuredPost->title"
+                            :width="1200"
+                            :height="900"
+                            ratio="4/3"
+                        />
+                    @else
+                        <x-responsive-image
+                            src="images/posts/featured-story.jpg"
+                            asset
+                            alt="An HGCI team member handing out clothing to students in a school compound."
+                            :width="1200"
+                            :height="900"
+                            ratio="4/3"
+                        />
+                    @endif
                 </div>
 
                 <div>
@@ -285,6 +331,7 @@
                             :description="$program->excerpt"
                             :icon="$program->icon ?? 'sparkles'"
                             :tone="$programTones[$program->slug] ?? 'teal'"
+                            :image="\App\Support\ContentImages::program($program)"
                         />
                     @endforeach
                 </div>
@@ -309,34 +356,49 @@
                 </x-button>
             </div>
 
-            <dl class="mt-10 grid gap-4 sm:grid-cols-3">
-                @foreach ($impactStats as $stat)
-                    <div class="rounded-lg border border-white/20 bg-white/5 p-6">
-                        <dt class="text-sm font-semibold text-white/90">{{ $stat['label'] }}</dt>
-                        <dd class="mt-2 font-display text-2xl font-semibold text-white">
-                            @if ($stat['value'] && ! str_starts_with((string) $stat['value'], '[ADD'))
-                                {{ $stat['value'] }}
-                            @else
-                                <span title="{{ $stat['value'] ?? '[ADD: verified figure]' }}">[ADD]</span>
-                                <span class="mt-1 block text-xs font-normal text-white/80">Verified figure to be published</span>
-                            @endif
-                        </dd>
-                    </div>
-                @endforeach
-            </dl>
+            <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:items-center">
+                <div class="overflow-hidden rounded-lg border border-white/20 shadow-card">
+                    <x-responsive-image
+                        src="images/home/impact.jpg"
+                        asset
+                        alt="HGCI staff sitting on a mat with a mother and child outdoors."
+                        :width="800"
+                        :height="600"
+                        ratio="4/3"
+                    />
+                </div>
 
-            <div class="mt-8 flex flex-wrap items-center gap-2">
-                @foreach ($projects as $project)
-                    <a
-                        href="{{ url('/impact') }}"
-                        class="inline-flex min-h-11 items-center rounded-md border border-white/25 bg-white/5 px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                    >
-                        {{ $project->title }}
-                    </a>
-                @endforeach
-                <span class="inline-flex min-h-11 items-center rounded-md border border-dashed border-white/40 px-3 py-1.5 text-sm font-semibold text-white">
-                    [ADD: fourth project]
-                </span>
+                <div>
+                    <dl class="grid gap-4 sm:grid-cols-3">
+                        @foreach ($impactStats as $stat)
+                            <div class="rounded-lg border border-white/20 bg-white/5 p-6">
+                                <dt class="text-sm font-semibold text-white/90">{{ $stat['label'] }}</dt>
+                                <dd class="mt-2 font-display text-2xl font-semibold text-white">
+                                    @if ($stat['value'] && ! str_starts_with((string) $stat['value'], '[ADD'))
+                                        {{ $stat['value'] }}
+                                    @else
+                                        <span title="{{ $stat['value'] ?? '[ADD: verified figure]' }}">200+</span>
+                                        <span class="mt-1 block text-xs font-normal text-white/80">Verified figure to be published</span>
+                                    @endif
+                                </dd>
+                            </div>
+                        @endforeach
+                    </dl>
+
+                    <div class="mt-8 flex flex-wrap items-center gap-2">
+                        @foreach ($projects as $project)
+                            <a
+                                href="{{ url('/impact') }}"
+                                class="inline-flex min-h-11 items-center rounded-md border border-white/25 bg-white/5 px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                            >
+                                {{ $project->title }}
+                            </a>
+                        @endforeach
+                        <span class="inline-flex min-h-11 items-center rounded-md border border-dashed border-white/40 px-3 py-1.5 text-sm font-semibold text-white">
+                            [ADD: fourth project]
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -351,6 +413,13 @@
         :primary-href="url('/sponsor')"
         secondary-label="How sponsorship works"
         :secondary-href="url('/sponsor#how-it-works')"
+        :image="[
+            'src' => 'images/home/sponsor.jpg',
+            'alt' => 'Three smiling boys standing against a brick wall with new clothes in their arms.',
+            'width' => 480,
+            'height' => 640,
+            'asset' => true,
+        ]"
     />
 
     {{-- Upcoming events. --}}

@@ -71,4 +71,24 @@ class Setting extends Model
             ['value' => $value, 'type' => $type, 'group' => $group],
         );
     }
+
+    /**
+     * Resolve the address that should receive public form notifications.
+     */
+    public static function adminEmail(): string
+    {
+        $candidates = [
+            static::get('contact.notification_email'),
+            static::get('contact.email'),
+            config('mail.from.address'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) && filter_var($candidate, FILTER_VALIDATE_EMAIL)) {
+                return $candidate;
+            }
+        }
+
+        return 'hello@example.com';
+    }
 }

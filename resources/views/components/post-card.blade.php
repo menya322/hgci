@@ -2,8 +2,22 @@
     'post',
 ])
 
+@php
+    $image = \App\Support\ContentImages::post($post, '16/10');
+@endphp
+
 <article class="group flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-card transition-colors hover:border-brand-teal">
-    <x-media :src="$post->featured_image" :alt="$post->image_alt ?? $post->title" />
+    <x-responsive-image
+        :src="$image['src'] ?? null"
+        :alt="$image['alt'] ?? $post->title"
+        :width="$image['width'] ?? 1200"
+        :height="$image['height'] ?? 900"
+        :ratio="$image['ratio'] ?? '16/10'"
+        :focus="$image['focus'] ?? 'center'"
+        :asset="$image['asset'] ?? false"
+        :label="$image['label'] ?? '[ADD: photo]'"
+        class="border-b border-line"
+    />
 
     <div class="flex flex-1 flex-col p-6">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted">

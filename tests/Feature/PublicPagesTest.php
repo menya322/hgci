@@ -86,4 +86,26 @@ class PublicPagesTest extends TestCase
             ->assertSee('Food Relief')
             ->assertSee('[ADD: fourth project]');
     }
+
+    public function test_sponsor_page_loads(): void
+    {
+        $this->get('/sponsor')
+            ->assertOk()
+            ->assertSee('Sponsor a child, change a life')
+            ->assertSee('Send sponsorship enquiry');
+    }
+
+    public function test_donate_page_loads(): void
+    {
+        $this->get('/donate')
+            ->assertOk()
+            ->assertSee('Ways to give');
+    }
+
+    public function test_get_involved_page_loads(): void
+    {
+        $this->get('/get-involved')
+            ->assertOk()
+            ->assertSee('Volunteer your time');
+    }
 }

@@ -67,10 +67,17 @@
     <section class="py-16 lg:py-24">
         <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
             <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
-                <x-media
-                    :src="$program->image"
-                    :alt="$program->image_alt ?? $program->title"
-                    ratio="aspect-[4/3]"
+                @php $detailImage = \App\Support\ContentImages::program($program, '4/3'); @endphp
+
+                <x-responsive-image
+                    :src="$detailImage['src'] ?? null"
+                    :alt="$detailImage['alt'] ?? $program->title"
+                    :width="$detailImage['width'] ?? 1500"
+                    :height="$detailImage['height'] ?? 1000"
+                    ratio="4/3"
+                    :focus="$detailImage['focus'] ?? 'center'"
+                    :asset="$detailImage['asset'] ?? false"
+                    :label="$detailImage['label'] ?? '[ADD: photo]'"
                 />
             </div>
 
@@ -159,6 +166,7 @@
                             :description="$other->excerpt"
                             :icon="$other->icon ?? 'sparkles'"
                             :tone="$programTones[$other->slug] ?? 'teal'"
+                            :image="\App\Support\ContentImages::program($other)"
                         />
                     @endforeach
                 </div>

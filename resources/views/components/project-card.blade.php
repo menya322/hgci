@@ -2,8 +2,22 @@
     'project',
 ])
 
+@php
+    $image = \App\Support\ContentImages::project($project, '16/10');
+@endphp
+
 <article class="group flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-card transition-colors hover:border-brand-teal">
-    <x-media :src="$project->image" :alt="$project->image_alt ?? $project->title" />
+    <x-responsive-image
+        :src="$image['src'] ?? null"
+        :alt="$image['alt'] ?? $project->title"
+        :width="$image['width'] ?? 1500"
+        :height="$image['height'] ?? 1000"
+        ratio="{{ $image['ratio'] ?? '16/10' }}"
+        :focus="$image['focus'] ?? 'center'"
+        :asset="$image['asset'] ?? false"
+        :label="$image['label'] ?? '[ADD: photo]'"
+        class="border-b border-line"
+    />
 
     <div class="flex flex-1 flex-col p-6">
         <div class="flex flex-wrap items-center gap-2">

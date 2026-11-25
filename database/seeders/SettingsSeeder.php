@@ -31,6 +31,7 @@ class SettingsSeeder extends Seeder
             ['contact.country', 'Uganda', 'text', 'contact'],
             ['contact.phone', '[ADD: phone number]', 'text', 'contact'],
             ['contact.email', '[ADD: email address]', 'text', 'contact'],
+            ['contact.notification_email', '[ADD: notification email address]', 'text', 'contact'],
             ['contact.office_hours', '[ADD: office hours]', 'text', 'contact'],
 
             // Social profiles are placeholders until HGCI supplies the links.

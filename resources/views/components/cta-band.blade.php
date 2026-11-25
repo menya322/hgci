@@ -9,6 +9,7 @@
     'secondaryLabel' => null,
     'secondaryHref' => null,
     'secondaryVariant' => null,
+    'image' => null,
 ])
 
 @php
@@ -76,6 +77,21 @@
                     </x-button>
                 @endif
             </div>
+
+            @if ($image)
+                <div class="w-36 shrink-0 overflow-hidden rounded-lg border border-white/30 shadow-card sm:w-44 lg:w-52">
+                    <x-responsive-image
+                        :src="$image['src'] ?? null"
+                        :alt="$image['alt'] ?? ''"
+                        :width="$image['width'] ?? 480"
+                        :height="$image['height'] ?? 640"
+                        :ratio="$image['ratio'] ?? '3/4'"
+                        :focus="$image['focus'] ?? 'center'"
+                        :asset="$image['asset'] ?? false"
+                        :label="$image['label'] ?? '[ADD: photo]'"
+                    />
+                </div>
+            @endif
         </div>
     </div>
 </section>

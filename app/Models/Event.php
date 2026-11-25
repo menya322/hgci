@@ -50,4 +50,9 @@ class Event extends Model
     {
         $query->where('starts_at', '>=', now());
     }
+
+    public function scopePast(Builder $query): void
+    {
+        $query->where('starts_at', '<', now());
+    }
 }

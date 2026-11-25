@@ -46,21 +46,23 @@
 
 @section('content')
     <x-page-hero
-        eyebrow="About HGCI"
-        title="Hope for every child, rooted in community"
-        description="Hope In God Child Initiatives is a child sponsorship and Christian humanitarian aid organisation serving orphans and vulnerable children in Uganda."
-        :breadcrumbs="[['label' => 'About']]"
-    >
-        <div class="flex flex-col gap-3 sm:flex-row">
-            <x-button href="{{ url('/sponsor') }}" size="lg">
-                <x-icon name="heart" class="size-5" />
-                Sponsor a child
-            </x-button>
-            <x-button href="{{ url('/donate') }}" variant="donate" size="lg">
-                Donate
-            </x-button>
-        </div>
-    </x-page-hero>
+    eyebrow="About HGCI"
+    title="Hope for every child, rooted in community"
+    description="Hope In God Child Initiatives is a child sponsorship and Christian humanitarian aid organisation serving orphans and vulnerable children in Uganda."
+    :breadcrumbs="[['label' => 'About']]"
+    image="images/gallery/community-care/community-home-visit.jpeg"
+    image-alt="HGCI staff sitting with a family outside their home during a community visit"
+>
+    <div class="flex flex-col gap-3 sm:flex-row">
+        <x-button href="{{ url('/sponsor') }}" size="lg">
+            <x-icon name="heart" class="size-5" />
+            Sponsor a child
+        </x-button>
+        <x-button href="{{ url('/donate') }}" variant="donate" size="lg">
+            Donate
+        </x-button>
+    </div>
+</x-page-hero>
 
     {{-- Who we are + at a glance. --}}
     <section class="py-16 lg:py-24">
@@ -76,6 +78,17 @@
                 @endif
 
                 <p class="mt-4 max-w-2xl leading-relaxed text-muted">{{ $approach }}</p>
+
+                <div class="mt-8 max-w-2xl overflow-hidden rounded-lg border border-line bg-surface shadow-card">
+                    <x-responsive-image
+                        src="images/about/hgci-profile.jpeg"
+                        asset
+                        alt="Two-page spread from the HGCI organisational profile covering our vision, mission, core values and strategic areas of focus."
+                        :width="1080"
+                        :height="764"
+                        ratio="4/3"
+                    />
+                </div>
 
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-button href="{{ url('/programs') }}" variant="outline">
@@ -242,8 +255,20 @@
             @if ($teamMembers->isNotEmpty())
                 <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($teamMembers as $member)
+                        @php $memberImage = \App\Support\ContentImages::teamMember($member, '4/3'); @endphp
+
                         <article class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
-                            <x-media :src="$member->photo" :alt="$member->name" ratio="aspect-[4/3]" />
+                            <x-responsive-image
+                                :src="$memberImage['src'] ?? null"
+                                :alt="$memberImage['alt'] ?? $member->name"
+                                :width="$memberImage['width'] ?? 800"
+                                :height="$memberImage['height'] ?? 600"
+                                ratio="4/3"
+                                :focus="$memberImage['focus'] ?? 'upper'"
+                                :asset="$memberImage['asset'] ?? false"
+                                :label="$memberImage['label'] ?? '[ADD: team photo]'"
+                                class="border-b border-line"
+                            />
 
                             <div class="p-6">
                                 <h3 class="font-display text-lg font-semibold text-ink">{{ $member->name }}</h3>
@@ -260,16 +285,30 @@
                     @endforeach
                 </div>
             @else
-                <div class="mt-10 rounded-lg border border-dashed border-line bg-surface-warm p-8 sm:p-10">
-                    <p class="font-display text-xl font-semibold text-ink">Team profiles are being prepared</p>
-                    <p class="mt-2 max-w-2xl leading-relaxed text-muted">
-                        [ADD: names, roles and biographies of HGCI leadership and staff.] Once supplied, each team
-                        member will appear here with their photo and role.
-                    </p>
-                    <x-button href="{{ url('/contact') }}" variant="outline" class="mt-6">
-                        Contact HGCI
-                        <x-icon name="arrow-right" class="size-4" />
-                    </x-button>
+                <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center">
+                    <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
+                        <x-responsive-image
+                            src="images/gallery/community-care/hgci-team-in-community.jpeg"
+                            asset
+                            alt="HGCI team members standing together with a community member outdoors."
+                            :width="810"
+                            :height="1080"
+                            ratio="4/3"
+                            focus="upper"
+                        />
+                    </div>
+
+                    <div class="rounded-lg border border-dashed border-line bg-surface-warm p-8 sm:p-10">
+                        <p class="font-display text-xl font-semibold text-ink">Team profiles are being prepared</p>
+                        <p class="mt-2 max-w-2xl leading-relaxed text-muted">
+                            [ADD: names, roles and biographies of HGCI leadership and staff.] Once supplied, each team
+                            member will appear here with their photo and role.
+                        </p>
+                        <x-button href="{{ url('/contact') }}" variant="outline" class="mt-6">
+                            Contact HGCI
+                            <x-icon name="arrow-right" class="size-4" />
+                        </x-button>
+                    </div>
                 </div>
             @endif
         </div>

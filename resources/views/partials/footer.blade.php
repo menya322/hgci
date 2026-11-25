@@ -91,19 +91,19 @@
                 <ul class="mt-4 space-y-3 text-sm text-white/85">
                     <li class="flex gap-3">
                         <x-icon name="map-pin" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
-                        <span>[ADD: physical address]<br>[ADD: city and district], Uganda</span>
+                        <span>Along Gayaza-Kasangati Road<br>Wakiso District, Uganda</span>
                     </li>
                     <li class="flex gap-3">
                         <x-icon name="phone" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
-                        <span>[ADD: phone number]</span>
+                        <span>+256702556778 +256777782661</span>
                     </li>
                     <li class="flex gap-3">
                         <x-icon name="envelope" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
-                        <span>[ADD: email address]</span>
+                        <span>info@hopegci.org</span>
                     </li>
                     <li class="flex gap-3">
                         <x-icon name="clock" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
-                        <span>[ADD: office hours]</span>
+                        <span>8:00am-5:00pm</span>
                     </li>
                 </ul>
 

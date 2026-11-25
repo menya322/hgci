@@ -47,11 +47,11 @@
         <div class="flex flex-wrap items-center gap-x-5 gap-y-1">
             <a href="{{ url('/contact') }}" class="inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-white hover:underline hover:decoration-brand-yellow hover:decoration-2 hover:underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 <x-icon name="phone" class="size-4 shrink-0 text-brand-yellow" />
-                <span>[ADD: phone number]</span>
+                <span>+256702556778   +256777782661</span>
             </a>
             <a href="{{ url('/contact') }}" class="inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-white hover:underline hover:decoration-brand-yellow hover:decoration-2 hover:underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 <x-icon name="envelope" class="size-4 shrink-0 text-brand-yellow" />
-                <span>[ADD: email address]</span>
+                <span> info@hopeforchildren.org</span>
             </a>
         </div>
 

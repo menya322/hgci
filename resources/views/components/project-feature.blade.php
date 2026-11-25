@@ -3,15 +3,24 @@
     'reverse' => false,
 ])
 
+@php
+    $image = \App\Support\ContentImages::project($project, '4/3');
+@endphp
+
 <article
     id="project-{{ $project->slug }}"
     {{ $attributes->class('grid scroll-mt-28 gap-8 lg:grid-cols-2 lg:items-center lg:gap-12') }}
 >
     <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card {{ $reverse ? 'lg:order-2' : '' }}">
-        <x-media
-            :src="$project->image"
-            :alt="$project->image_alt ?? $project->title"
-            ratio="aspect-[4/3]"
+        <x-responsive-image
+            :src="$image['src'] ?? null"
+            :alt="$image['alt'] ?? $project->title"
+            :width="$image['width'] ?? 1500"
+            :height="$image['height'] ?? 1000"
+            ratio="{{ $image['ratio'] ?? '4/3' }}"
+            :focus="$image['focus'] ?? 'center'"
+            :asset="$image['asset'] ?? false"
+            :label="$image['label'] ?? '[ADD: photo]'"
         />
     </div>
 
