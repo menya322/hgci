@@ -1,7 +1,7 @@
 @props(['variant' => 'light', 'showWordmark' => true])
 
 @php
-    $hasLogo = file_exists(public_path('images/logo.png'));
+    $hasLogo = file_exists(public_path('images/logo-mark.png'));
     $dark = $variant === 'dark';
 @endphp
 
@@ -11,11 +11,11 @@
 >
     @if ($hasLogo)
         <img
-            src="{{ asset('images/logo.png') }}"
+            src="{{ asset('images/logo-mark.png') }}"
             alt="Hope In God Child Initiatives logo"
-            class="h-11 w-auto"
-            width="176"
-            height="44"
+            class="h-11 w-auto shrink-0"
+            width="216"
+            height="227"
         >
     @else
         <svg class="h-11 w-11 shrink-0" viewBox="0 0 64 64" role="img" aria-label="Hope In God Child Initiatives logo">

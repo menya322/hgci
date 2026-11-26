@@ -70,12 +70,12 @@ Legend for **Owner**:
 
 | # | Slot | Rendered in | Path | Recommended pixels | Ratio | Owner |
 |---|---|---|---|---|---|---|
-| G1 | Site logo | `components/logo.blade.php` | `public/images/logo.png` | 512 × 128 (PNG, transparency) | 4:1 | Static |
+| G1 | Site logo | `components/logo.blade.php` | `public/images/logo.png` (full lockup), `public/images/logo-mark.png` (emblem) | 216 x 227 (PNG, transparency) | 1:1 | Static |
 | G2 | Default social-share image | `partials/seo.blade.php` (included from `layouts/app.blade.php` `<head>`) | `public/images/og/og-default.jpg` | 1200 × 630 | 1.91:1 | Static |
 | G3 | Page social-share image (stories, events) | `partials/share-image.blade.php`, read by `partials/seo.blade.php` | resolved by `ContentImages::post()` / `::event()` | any landscape crop; 1200 × 630 ideal | 1.91:1 | DB upload + fallback |
 | G4 | Favicon | Browser tab | `public/favicon.ico` | 32 × 32 and 48 × 48 | 1:1 | Static |
 
-`logo.png` is missing, so the inline SVG hexagon wordmark is used. `public/favicon.ico` exists but is 0 bytes.
+`logo-mark.png` is a cleaned, transparent crop of the supplied logo (source: `public/images/home/logo.jpg`); `logo.png` keeps the full lockup. The header, footer and favicon use the emblem.
 
 `og-default.jpg` is a 1200 × 630 crop of `hero/home-hero.jpg` (194 KB), so it uses the same consented
 photograph rather than introducing a new one. Every page emits `og:image`, `og:image:width`,
@@ -205,8 +205,8 @@ Upload validation caps files at 2 MB.
 - [ ] `public/images/projects/cow-rearing.jpg` — `[ADD: cow rearing photo]`
 - [ ] `public/images/projects/goat-rearing.jpg` — `[ADD: goat rearing photo]`
 - [ ] `public/images/projects/fourth-project.jpg` — `[ADD: project photo]` on Impact
-- [ ] `public/images/logo.png` — SVG hexagon fallback in use
-- [ ] `public/favicon.ico` — present but 0 bytes
+- [x] `public/images/logo-mark.png` - supplied logo, cleaned and transparent (header, footer, favicon)
+- [x] Browser tab icon - `public/images/logo-mark.png` linked from the layout
 
 ### 3.2 Optional photography
 
@@ -284,8 +284,8 @@ No leftover uploads remain. A stray test image from an earlier session had been 
 
 ## 5. Known gaps
 
-1. `public/images/logo.png` is missing and the inline SVG fallback does the work.
-2. `public/favicon.ico` is 0 bytes.
+1. The supplied logo is a 672 x 682 JPEG photo of the brochure, so the mark was cropped and converted to transparency; a vector original would sharpen it further.
+2. `public/favicon.ico` is still an empty placeholder; the layout links the PNG emblem instead.
 3. The Contact page reuses a gallery path instead of using a dedicated contact photo or admin field.
 4. Gallery cards force a 4:3 crop; 11 of the 25 seeded photos are portrait.
 5. The three livestock projects (piggery, cow rearing, goat rearing) have **no photography at all** — only the placeholder path is reserved.

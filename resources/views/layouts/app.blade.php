@@ -7,6 +7,8 @@
 
     @include('partials.seo')
 
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-mark.png') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
