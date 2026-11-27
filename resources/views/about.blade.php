@@ -181,31 +181,47 @@
     </section>
 
     {{-- Strategic areas of focus. --}}
-    <section class="py-16 lg:py-24">
-        <div class="container-page">
+    @php
+        $focusImage = \App\Support\ImageSource::url('images/gallery/education-school-support/school-support-gathering.jpeg', asset: true);
+    @endphp
+
+    <section class="relative isolate overflow-hidden bg-ink py-16 text-white lg:py-24">
+        @if ($focusImage)
+            <img
+                src="{{ $focusImage }}"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover"
+            >
+            <div aria-hidden="true" class="absolute inset-0 bg-ink/85"></div>
+        @endif
+
+        <div class="container-page relative z-10">
             <x-section-heading
                 eyebrow="Strategic focus"
                 title="Where we put our energy"
                 description="Five strategic areas guide how HGCI serves children and communities in Uganda."
+                tone="dark"
             />
 
-            <ol class="mt-12 grid gap-x-10 gap-y-8 md:grid-cols-2">
+            <ol class="mt-12 grid items-start gap-x-12 gap-y-10 md:grid-cols-2">
                 @foreach ($focusAreas as $area)
-                    <li class="flex gap-5">
-                        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-brand-teal font-display text-lg font-semibold text-white">
+                    <li class="flex items-start gap-5">
+                        <span class="mt-0.5 inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-brand-teal font-display text-lg font-semibold leading-none text-white">
                             {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                         </span>
                         <div>
-                            <h3 class="font-display text-lg font-semibold text-ink">{{ $area['title'] }}</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-muted">{{ $area['description'] }}</p>
+                            <h3 class="font-display text-lg font-semibold leading-snug text-white">{{ $area['title'] }}</h3>
+                            <p class="mt-1.5 text-sm leading-relaxed text-white/80">{{ $area['description'] }}</p>
                         </div>
                     </li>
                 @endforeach
             </ol>
 
-            <div class="mt-12 rounded-lg border border-line bg-surface-warm p-6 sm:p-8">
-                <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">Our strategic goal</p>
-                <p class="mt-2 font-display text-2xl font-semibold leading-tight text-ink">{{ $strategicGoal }}</p>
+            <div class="mt-12 rounded-lg border border-white/20 bg-white/10 p-6 sm:p-8">
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">Our strategic goal</p>
+                <p class="mt-2 font-display text-2xl font-semibold leading-tight text-white">{{ $strategicGoal }}</p>
             </div>
         </div>
     </section>

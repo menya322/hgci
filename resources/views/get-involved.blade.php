@@ -17,6 +17,7 @@
             'copy' => 'Churches, schools, businesses and organisations can partner with HGCI.',
             'link' => url('/contact'),
             'link-label' => 'Start a conversation',
+            'id' => 'partner',
         ],
         [
             'icon' => 'gift',
@@ -87,7 +88,10 @@
 
             <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($ways as $way)
-                    <article class="flex flex-col rounded-lg border border-line bg-surface p-6 shadow-card">
+                    <article
+                        @if (! empty($way['id'])) id="{{ $way['id'] }}" @endif
+                        class="flex flex-col rounded-lg border border-line bg-surface p-6 shadow-card"
+                    >
                         <span class="inline-flex size-11 items-center justify-center rounded-lg {{ $way['tone'] }}">
                             <x-icon :name="$way['icon']" class="size-6" />
                         </span>
@@ -149,7 +153,7 @@
     </section>
 
     {{-- Volunteer application form. --}}
-    <section id="volunteer" class="scroll-mt-28 py-16 lg:py-24">
+    <section id="volunteer" class="py-16 lg:py-24">
         <div class="container-page grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-start">
             <div>
                 <x-section-heading

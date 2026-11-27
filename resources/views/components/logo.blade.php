@@ -7,7 +7,7 @@
 
 <a
     href="{{ url('/') }}"
-    {{ $attributes->class('inline-flex items-center gap-3 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-teal') }}
+    {{ $attributes->class('inline-flex shrink-0 items-center gap-3 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-teal') }}
 >
     @if ($hasLogo)
         <img

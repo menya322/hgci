@@ -2,12 +2,14 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('partials.seo')
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo-mark.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-mark.png') }}">
+    <meta name="theme-color" content="#0A5B65">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

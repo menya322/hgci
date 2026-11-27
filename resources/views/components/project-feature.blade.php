@@ -9,7 +9,7 @@
 
 <article
     id="project-{{ $project->slug }}"
-    {{ $attributes->class('grid scroll-mt-28 gap-8 lg:grid-cols-2 lg:items-center lg:gap-12') }}
+    {{ $attributes->class('grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12') }}
 >
     <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card {{ $reverse ? 'lg:order-2' : '' }}">
         <x-responsive-image

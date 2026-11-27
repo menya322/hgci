@@ -104,43 +104,54 @@
 
     {{-- Livelihood and relief projects. --}}
     @if ($projects->isNotEmpty())
-        <section class="py-16 lg:py-20" aria-labelledby="projects-heading">
-            <div class="container-page">
-                <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        @php
+            $projectsImage = \App\Support\ImageSource::url('images/programs/livelihood.jpg', asset: true);
+        @endphp
+
+        <section class="relative isolate overflow-hidden bg-ink py-16 text-white lg:py-20" aria-label="Livelihood and relief projects">
+            @if ($projectsImage)
+                <img
+                    src="{{ $projectsImage }}"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    class="absolute inset-0 h-full w-full object-cover"
+                >
+                <div aria-hidden="true" class="absolute inset-0 bg-ink/85"></div>
+            @endif
+
+            <div class="container-page relative z-10">
+                <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
                     <x-section-heading
                         eyebrow="Livelihood and relief"
                         title="Projects that strengthen families"
                         description="Our community-led projects support families to grow their own food, build income and meet immediate needs."
+                        tone="dark"
                     />
 
-                    <x-button href="{{ url('/impact') }}" variant="outline" class="shrink-0">
+                    <x-button href="{{ url('/impact') }}" variant="outline-light" class="shrink-0 md:mb-1">
                         Explore our impact
                         <x-icon name="arrow-right" class="size-4" />
                     </x-button>
                 </div>
 
-                <div class="mt-10 rounded-lg border border-line bg-surface-warm p-6 sm:p-8">
+                <div class="mt-10 rounded-lg border border-white/20 bg-white/10 p-6 sm:p-8">
                     <ul class="flex flex-wrap gap-2">
                         @foreach ($projects as $project)
                             <li>
                                 <a
                                     href="{{ url('/impact#project-'.$project->slug) }}"
-                                    class="inline-flex min-h-11 items-center rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-semibold text-ink transition-colors hover:border-brand-teal hover:text-brand-teal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal"
+                                    class="inline-flex min-h-11 items-center rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-semibold text-ink transition-colors hover:border-brand-teal hover:text-brand-teal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow"
                                 >
                                     {{ $project->title }}
                                 </a>
                             </li>
                         @endforeach
-                        <li>
-                            <span class="inline-flex min-h-11 items-center rounded-md border border-dashed border-line px-3 py-1.5 text-sm font-semibold text-muted">
-                                [ADD: fourth project]
-                            </span>
-                        </li>
                     </ul>
 
-                    <p class="mt-4 text-sm leading-relaxed text-muted">
+                    <p class="mt-4 text-sm leading-relaxed text-white/80">
                         Piggery, cow rearing, goat rearing and food relief are part of HGCI's wider livelihood and
-                        relief work. [ADD: details of the fourth project.]
+                        relief work.
                     </p>
                 </div>
             </div>

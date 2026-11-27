@@ -45,16 +45,24 @@
         </div>
     </x-page-hero>
 
-    <section id="contact-form" class="scroll-mt-28 py-16 lg:py-24">
-        <div class="container-page grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">
-            <div class="rounded-lg border border-line bg-surface p-6 shadow-card sm:p-8">
-                <x-section-heading
-                    eyebrow="Send a message"
-                    title="How can we help?"
-                    description="Complete the form and our team will get back to you as soon as possible."
-                />
+    <section id="contact-form" class="py-16 lg:py-24">
+        <div class="container-page grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start lg:gap-12">
+            <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
+                <div class="flex items-center gap-4 border-b border-line bg-surface-warm p-6 sm:p-8">
+                    <span class="inline-flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand-teal text-white">
+                        <x-icon name="envelope" class="size-6" />
+                    </span>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-teal">Send a message</p>
+                        <h2 class="mt-1 font-display text-2xl font-semibold leading-tight text-ink">How can we help?</h2>
+                    </div>
+                </div>
 
-                <form method="POST" action="{{ route('contact.store') }}" class="mt-8 space-y-5">
+                <p class="px-6 pt-6 text-sm leading-relaxed text-muted sm:px-8 sm:pt-8">
+                    Complete the form and our team will get back to you as soon as possible.
+                </p>
+
+                <form method="POST" action="{{ route('contact.store') }}" class="space-y-5 px-6 pb-6 pt-5 sm:px-8 sm:pb-8">
                     @csrf
                     <x-form.honeypot />
                     <x-form.errors />
@@ -111,28 +119,35 @@
             </div>
 
             <aside class="space-y-6" aria-label="Contact details">
-                <div class="rounded-lg border border-line bg-surface-warm p-6">
-                    <h2 class="font-display text-xl font-semibold text-ink">Contact details</h2>
+                <div class="overflow-hidden rounded-lg border border-line bg-surface-warm shadow-card">
+                    <div class="border-b border-line px-6 py-5">
+                        <h2 class="font-display text-xl font-semibold text-ink">Contact details</h2>
+                        <p class="mt-1 text-sm text-muted">Reach our team directly.</p>
+                    </div>
 
-                    <dl class="mt-5 space-y-5 text-sm">
-                        <div class="flex gap-3">
-                            <dt class="shrink-0 text-brand-teal">
-                                <span class="sr-only">Address</span>
-                                <x-icon name="map-pin" class="size-5" />
+                    <dl class="divide-y divide-line text-sm">
+                        <div class="px-6 py-4">
+                            <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                                <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-brand-teal/10 text-brand-teal" aria-hidden="true">
+                                    <x-icon name="map-pin" class="size-4" />
+                                </span>
+                                Address
                             </dt>
-                            <dd class="leading-relaxed text-ink">
+                            <dd class="mt-2 pl-10 leading-relaxed text-ink">
                                 {{ $addressLine1 }}<br>
                                 {{ $addressLine2 }}<br>
                                 {{ $country }}
                             </dd>
                         </div>
 
-                        <div class="flex gap-3">
-                            <dt class="shrink-0 text-brand-teal">
-                                <span class="sr-only">Phone</span>
-                                <x-icon name="phone" class="size-5" />
+                        <div class="px-6 py-4">
+                            <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                                <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-brand-teal/10 text-brand-teal" aria-hidden="true">
+                                    <x-icon name="phone" class="size-4" />
+                                </span>
+                                Phone
                             </dt>
-                            <dd>
+                            <dd class="mt-2 break-words pl-10">
                                 @if ($phoneHref)
                                     <a href="{{ $phoneHref }}" class="font-medium text-ink underline decoration-2 underline-offset-4 hover:text-brand-teal">{{ $phone }}</a>
                                 @else
@@ -141,12 +156,14 @@
                             </dd>
                         </div>
 
-                        <div class="flex gap-3">
-                            <dt class="shrink-0 text-brand-teal">
-                                <span class="sr-only">Email</span>
-                                <x-icon name="envelope" class="size-5" />
+                        <div class="px-6 py-4">
+                            <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                                <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-brand-teal/10 text-brand-teal" aria-hidden="true">
+                                    <x-icon name="envelope" class="size-4" />
+                                </span>
+                                Email
                             </dt>
-                            <dd class="min-w-0 break-words">
+                            <dd class="mt-2 break-words pl-10">
                                 @if ($emailHref)
                                     <a href="{{ $emailHref }}" class="font-medium text-ink underline decoration-2 underline-offset-4 hover:text-brand-teal">{{ $email }}</a>
                                 @else
@@ -155,16 +172,18 @@
                             </dd>
                         </div>
 
-                        <div class="flex gap-3">
-                            <dt class="shrink-0 text-brand-teal">
-                                <span class="sr-only">Office hours</span>
-                                <x-icon name="clock" class="size-5" />
+                        <div class="px-6 py-4">
+                            <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                                <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-brand-teal/10 text-brand-teal" aria-hidden="true">
+                                    <x-icon name="clock" class="size-4" />
+                                </span>
+                                Office hours
                             </dt>
-                            <dd class="text-muted">{{ $officeHours }}</dd>
+                            <dd class="mt-2 pl-10 text-muted">{{ $officeHours }}</dd>
                         </div>
                     </dl>
 
-                    <div class="mt-6 border-t border-line pt-5">
+                    <div class="border-t border-line px-6 py-5">
                         <h3 class="text-sm font-semibold text-ink">Follow HGCI</h3>
                         <div class="mt-3 flex flex-wrap gap-2">
                             @foreach ($socialLinks as $social)
@@ -195,18 +214,22 @@
                     </div>
                 </div>
 
-                <div id="prayer" class="scroll-mt-28 rounded-lg border border-brand-yellow-dark/30 bg-brand-yellow p-6 text-ink">
-                    <span class="inline-flex size-11 items-center justify-center rounded-lg bg-white text-brand-red">
-                        <x-icon name="heart" class="size-6" />
-                    </span>
-                    <h2 class="mt-4 font-display text-xl font-semibold">Prayer requests</h2>
-                    <p class="mt-2 text-sm leading-relaxed">
-                        We would be honoured to pray with you. Choose <strong>Prayer request</strong> as the subject in
-                        the form, and share as much or as little as you feel comfortable.
-                    </p>
+                <div id="prayer" class="overflow-hidden rounded-lg border border-brand-yellow-dark/40 bg-brand-yellow p-6 text-ink shadow-card">
+                    <div class="flex items-start gap-3">
+                        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-surface text-brand-red">
+                            <x-icon name="heart" class="size-6" />
+                        </span>
+                        <div>
+                            <h2 class="font-display text-xl font-semibold">Prayer requests</h2>
+                            <p class="mt-1.5 text-sm leading-relaxed">
+                                We would be honoured to pray with you. Choose <strong>Prayer request</strong> as the
+                                subject in the form, and share as much or as little as you feel comfortable.
+                            </p>
+                        </div>
+                    </div>
                     <a
                         href="#contact-form"
-                        class="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm font-semibold underline decoration-2 underline-offset-4 hover:text-brand-red focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                        class="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-teal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                     >
                         Send a prayer request
                         <x-icon name="arrow-right" class="size-4" />
@@ -216,52 +239,62 @@
         </div>
     </section>
 
-    <section id="visit" class="scroll-mt-28 border-y border-line bg-surface-warm py-16 lg:py-24">
-        <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
+    {{-- Visit us. --}}
+    @php
+        $visitImage = \App\Support\ImageSource::url('images/gallery/community-care/community-home-visit.jpeg', asset: true);
+    @endphp
+
+    <section id="visit" class="relative isolate overflow-hidden bg-ink py-16 text-white lg:py-24">
+        @if ($visitImage)
+            <img
+                src="{{ $visitImage }}"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover"
+            >
+            <div aria-hidden="true" class="absolute inset-0 bg-ink/85"></div>
+        @endif
+
+        <div class="container-page relative z-10 grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
             <div>
                 <x-section-heading
                     eyebrow="Visit us"
                     title="Find HGCI in Uganda"
                     description="Our team works alongside children, families and community members. Get in touch before visiting so we can welcome you well."
+                    tone="dark"
                 />
 
-                <div class="mt-8 overflow-hidden rounded-lg border border-line bg-surface">
-                    <div class="relative flex aspect-[16/9] items-center justify-center bg-surface-warm p-6">
-                        <div class="text-center">
-                            <span class="inline-flex size-14 items-center justify-center rounded-lg border border-dashed border-brand-teal/50 bg-surface text-brand-teal">
-                                <x-icon name="map-pin" class="size-7" />
-                            </span>
-                            <p class="mt-4 text-sm font-semibold text-ink">[ADD: map and exact location]</p>
-                            <p class="mt-1 text-xs leading-relaxed text-muted">
-                                A map will be added once the physical address is confirmed.
-                            </p>
-                        </div>
-                    </div>
+                <div class="mt-8 space-y-4 text-sm leading-relaxed text-white/90">
+                    <p class="flex items-start gap-3">
+                        <x-icon name="map-pin" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
+                        <span>{{ $addressLine1 }}, {{ $addressLine2 }}, {{ $country }}</span>
+                    </p>
+                    <p class="flex items-start gap-3">
+                        <x-icon name="clock" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
+                        <span>{{ $officeHours }}</span>
+                    </p>
+                </div>
 
-                    <div class="border-t border-line p-6">
-                        <p class="text-sm leading-relaxed text-ink">
-                            {{ $addressLine1 }}<br>
-                            {{ $addressLine2 }}<br>
-                            {{ $country }}
+                <x-button href="#contact-form" variant="outline-light" class="mt-8">
+                    Send us a message
+                    <x-icon name="arrow-right" class="size-4" />
+                </x-button>
+            </div>
+
+            <div class="overflow-hidden rounded-lg border border-line bg-surface text-ink shadow-card">
+                <div class="relative flex aspect-[16/9] items-center justify-center bg-surface-warm p-6">
+                    <div class="text-center">
+                        <span class="inline-flex size-14 items-center justify-center rounded-lg border border-dashed border-brand-teal/50 bg-surface text-brand-teal">
+                            <x-icon name="map-pin" class="size-7" />
+                        </span>
+                        <p class="mt-4 text-sm font-semibold text-ink"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.77742635328!2d32.60169254724417!3d0.4516578427025737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177db3ef41731c2d%3A0xf724f1d9aa11575b!2sGayaza!5e0!3m2!1sen!2sug!4v1795805076584!5m2!1sen!2sug" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></p>
+                        <p class="mt-1 text-xs leading-relaxed text-muted">
+                            A map will be added once the physical address is confirmed.
                         </p>
-                        <p class="mt-3 text-sm text-muted">{{ $officeHours }}</p>
                     </div>
                 </div>
             </div>
-
-            <figure class="overflow-hidden rounded-lg border border-line bg-surface shadow-card">
-                <x-responsive-image
-                    src="images/gallery/community-care/community-home-visit.jpeg"
-                    asset
-                    alt="HGCI staff and community members sitting together during a home visit."
-                    :width="1080"
-                    :height="810"
-                    ratio="4/3"
-                />
-                <figcaption class="border-t border-line p-5 text-sm leading-relaxed text-muted">
-                    HGCI staff and community members during a home visit. [ADD: photo credit and consent details.]
-                </figcaption>
-            </figure>
         </div>
     </section>
 

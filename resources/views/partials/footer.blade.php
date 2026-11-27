@@ -23,7 +23,7 @@
     ];
 @endphp
 
-<footer class="bg-brand-teal-dark text-white">
+<footer class="bg-brand-teal-dark pb-[env(safe-area-inset-bottom)] text-white">
     <div class="container-page py-14 lg:py-16">
         <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
             <div class="lg:col-span-4">

@@ -86,24 +86,13 @@
             <div class="mt-14 rounded-lg border border-dashed border-line bg-surface p-6 sm:p-8">
                 <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
-                        <div class="w-full shrink-0 overflow-hidden rounded-lg border border-line sm:w-48">
-                            <x-responsive-image
-                                src="images/projects/fourth-project.jpg"
-                                asset
-                                alt="Photo of the HGCI livelihood and relief project still to be confirmed."
-                                :width="800"
-                                :height="600"
-                                ratio="4/3"
-                                label="[ADD: project photo]"
-                            />
-                        </div>
+                        
 
                         <div>
-                            <x-badge tone="yellow">[ADD: fourth project]</x-badge>
-                            <p class="mt-3 font-display text-lg font-semibold text-ink">One more project to be confirmed</p>
+                            <x-badge tone="yellow">Women Empowerment Building Stronger Women and Communities</x-badge>
                             <p class="mt-1 max-w-xl text-sm leading-relaxed text-muted">
-                                The HGCI brochure lists a fourth livelihood and relief project without a name. Its title,
-                                photos and outcomes will be added here once HGCI supplies them.
+                                HGCI empowers women through skills development, entrepreneurship, financial literacy, and income-generating 
+                                opportunities. We aim to promote economic independence, strengthen families, build confidence, and create sustainable livelihoods for women in vulnerable communities.
                             </p>
                         </div>
                     </div>

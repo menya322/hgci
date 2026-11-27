@@ -39,12 +39,19 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        /* Keep hash targets clear of the sticky header on every device. */
+        scroll-padding-top: 6.5rem;
+        /* Stop iOS/Android from inflating body text in landscape. */
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
 
     body {
         @apply bg-surface font-sans text-ink antialiased;
         font-size: 1.0625rem;
         line-height: 1.65;
+        /* Long email addresses and words wrap instead of widening the page. */
+        overflow-wrap: break-word;
     }
 
     h1,
@@ -93,13 +100,17 @@
     width: 100%;
     max-width: 75rem;
     margin-inline: auto;
-    padding-inline: 1rem;
+    /* max() keeps text clear of notches and rounded corners on phones. */
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
 
     @media (width >= 40rem) {
-        padding-inline: 1.5rem;
+        padding-left: max(1.5rem, env(safe-area-inset-left));
+        padding-right: max(1.5rem, env(safe-area-inset-right));
     }
 
     @media (width >= 64rem) {
-        padding-inline: 2rem;
+        padding-left: max(2rem, env(safe-area-inset-left));
+        padding-right: max(2rem, env(safe-area-inset-right));
     }
 }

@@ -1,4 +1,4 @@
-﻿@php
+@php
     $navigation = [
         [
             'label' => 'About',
@@ -42,7 +42,7 @@
     ];
 @endphp
 
-<div class="bg-brand-teal-dark text-white">
+<div class="bg-brand-teal-dark pt-[env(safe-area-inset-top)] text-white">
     <div class="container-page flex min-h-10 flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-xs sm:text-sm">
         <div class="flex flex-wrap items-center gap-x-5 gap-y-1">
             <a href="{{ url('/contact') }}" class="inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-white hover:underline hover:decoration-brand-yellow hover:decoration-2 hover:underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
@@ -51,7 +51,7 @@
             </a>
             <a href="{{ url('/contact') }}" class="inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-white hover:underline hover:decoration-brand-yellow hover:decoration-2 hover:underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 <x-icon name="envelope" class="size-4 shrink-0 text-brand-yellow" />
-                <span> info@hopeforchildren.org</span>
+                <span> info@hopeingodci.org</span>
             </a>
         </div>
 
@@ -59,7 +59,13 @@
     </div>
 </div>
 
-<header x-data="{ mobileOpen: false }" class="sticky top-0 z-50 border-b border-line bg-surface shadow-card">
+<header
+    x-data="{ mobileOpen: false }"
+    x-effect="document.body.classList.toggle('overflow-hidden', mobileOpen)"
+    @resize.window="if (window.innerWidth >= 1280) mobileOpen = false"
+    @keydown.escape.window="mobileOpen = false"
+    class="sticky top-0 z-50 border-b border-line bg-surface shadow-card"
+>
     <div class="container-page flex h-20 items-center justify-between gap-4">
         <x-logo />
 
@@ -109,11 +115,15 @@
             <x-nav-link :href="url('/contact')" :active="request()->is('contact*')">Contact</x-nav-link>
         </nav>
 
-        <div class="flex items-center gap-2">
-            <x-button href="{{ url('/donate') }}" variant="donate" size="sm" class="hidden sm:inline-flex">
-                <x-icon name="heart" class="size-4" />
-                Donate
-            </x-button>
+        <div class="flex shrink-0 items-center gap-2">
+            {{-- Wrapper (not a class on the button) so the button's own
+                 inline-flex cannot override `hidden` on small screens. --}}
+            <div class="hidden sm:block">
+                <x-button href="{{ url('/donate') }}" variant="donate" size="sm">
+                    <x-icon name="heart" class="size-4" />
+                    Donate
+                </x-button>
+            </div>
 
             <button
                 type="button"
@@ -129,10 +139,21 @@
         </div>
     </div>
 
-    <div x-show="mobileOpen" x-cloak id="mobile-menu" class="border-t border-line bg-surface xl:hidden">
-        <nav class="container-page max-h-[calc(100vh-8rem)] overflow-y-auto py-4" aria-label="Mobile navigation">
+    {{-- Mobile menu: overlays the page (does not push content) and keeps the
+         Sponsor / Donate buttons pinned to the bottom of the panel so they are
+         always reachable on small and short screens. --}}
+    <div
+        x-show="mobileOpen"
+        x-cloak
+        x-effect="if (mobileOpen) { $nextTick(() => { const top = $el.getBoundingClientRect().top; $el.style.maxHeight = Math.max(160, window.innerHeight - top) + 'px'; }); }"
+        @resize.window="if (mobileOpen) { $nextTick(() => { const top = $el.getBoundingClientRect().top; $el.style.maxHeight = Math.max(160, window.innerHeight - top) + 'px'; }); }"
+        id="mobile-menu"
+        class="absolute inset-x-0 top-full flex max-h-[calc(100dvh-5rem)] flex-col overflow-hidden border-t border-line bg-surface shadow-card xl:hidden"
+    >
+        <nav class="container-page min-h-0 flex-1 overflow-y-auto overscroll-contain py-4" aria-label="Mobile navigation">
             <a
                 href="{{ url('/') }}"
+                @click="mobileOpen = false"
                 class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold transition-colors {{ request()->is('/') ? 'bg-surface-warm text-brand-teal' : 'text-ink hover:bg-surface-warm hover:text-brand-teal' }}"
             >Home</a>
 
@@ -142,23 +163,26 @@
                 @foreach ($group['items'] as $item)
                     <a
                         href="{{ $item['url'] }}"
+                        @click="mobileOpen = false"
                         class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-warm hover:text-brand-teal"
                     >{{ $item['label'] }}</a>
                 @endforeach
             @endforeach
 
             <p class="px-3 pb-1 pt-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">Explore</p>
-            <a href="{{ url('/gallery') }}" class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-warm hover:text-brand-teal">Gallery</a>
-            <a href="{{ url('/contact') }}" class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-warm hover:text-brand-teal">Contact</a>
+            <a href="{{ url('/gallery') }}" @click="mobileOpen = false" class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-warm hover:text-brand-teal">Gallery</a>
+            <a href="{{ url('/contact') }}" @click="mobileOpen = false" class="flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-warm hover:text-brand-teal">Contact</a>
+        </nav>
 
-            <div class="mt-4 grid gap-2 border-t border-line pt-4 sm:grid-cols-2">
+        <div class="shrink-0 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)]">
+            <div class="container-page grid gap-2 py-4 sm:grid-cols-2">
                 <x-button href="{{ url('/sponsor') }}" variant="outline" class="w-full">Sponsor a child</x-button>
                 <x-button href="{{ url('/donate') }}" variant="donate" class="w-full">
                     <x-icon name="heart" class="size-4" />
                     Donate
                 </x-button>
             </div>
-        </nav>
+        </div>
     </div>
 </header>
 

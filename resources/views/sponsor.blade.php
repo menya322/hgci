@@ -72,7 +72,7 @@
     </x-page-hero>
 
     {{-- How sponsorship works. --}}
-    <section id="how-it-works" class="scroll-mt-28 py-16 lg:py-24">
+    <section id="how-it-works" class="py-16 lg:py-24">
         <div class="container-page">
             <div class="grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center">
                 <div>
@@ -98,20 +98,28 @@
                         ratio="4/3"
                         focus="upper"
                     />
-                    <figcaption class="border-t border-line p-5 text-sm leading-relaxed text-muted">
+                    <figcaption class="flex items-center gap-2 border-t border-line p-4 text-sm leading-relaxed text-muted">
+                        <span class="size-1.5 shrink-0 rounded-full bg-brand-teal" aria-hidden="true"></span>
                         A child and an HGCI staff member during a community visit.
-                        [ADD: photo credit and consent details.]
                     </figcaption>
                 </figure>
             </div>
 
             <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($steps as $step)
-                    <li class="rounded-lg border border-line bg-surface p-6 shadow-card">
-                        <span class="inline-flex size-11 items-center justify-center rounded-lg bg-brand-teal font-display text-lg font-semibold text-white">
-                            {{ $loop->iteration }}
-                        </span>
-                        <h3 class="mt-4 font-display text-lg font-semibold text-ink">{{ $step['title'] }}</h3>
+                    <li class="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:border-brand-teal hover:shadow-md">
+                        <span class="absolute inset-x-0 top-0 h-1 {{ ['bg-brand-teal', 'bg-brand-yellow', 'bg-brand-orange', 'bg-brand-green'][$loop->index % 4] }}" aria-hidden="true"></span>
+
+                        <div class="flex items-center justify-between gap-3">
+                            <span class="inline-flex size-11 items-center justify-center rounded-lg bg-brand-teal font-display text-lg font-semibold text-white">
+                                {{ $loop->iteration }}
+                            </span>
+                            <span class="text-xs font-bold uppercase tracking-[0.16em] text-muted">
+                                Step {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                            </span>
+                        </div>
+
+                        <h3 class="mt-5 font-display text-lg font-semibold text-ink">{{ $step['title'] }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-muted">{{ $step['copy'] }}</p>
                     </li>
                 @endforeach
@@ -120,16 +128,33 @@
     </section>
 
     {{-- What a gift provides. --}}
-    <section class="border-y border-line bg-surface-warm py-16 lg:py-24">
-        <div class="container-page">
-            <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    @php
+        $giftsImage = \App\Support\ImageSource::url('images/gallery/food-relief/family-receiving-food-parcel.jpeg', asset: true);
+        $giftAccents = ['bg-brand-orange', 'bg-brand-yellow', 'bg-brand-teal', 'bg-brand-green'];
+    @endphp
+
+    <section class="relative isolate overflow-hidden bg-ink py-16 text-white lg:py-24">
+        @if ($giftsImage)
+            <img
+                src="{{ $giftsImage }}"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover"
+            >
+            <div aria-hidden="true" class="absolute inset-0 bg-ink/85"></div>
+        @endif
+
+        <div class="container-page relative z-10">
+            <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
                 <x-section-heading
                     eyebrow="What your gift provides"
                     title="Support that reaches the whole child"
                     description="Sponsorship is used where a child needs it most, alongside the wider work of HGCI in their community."
+                    tone="dark"
                 />
 
-                <x-button href="#enquiry" class="shrink-0">
+                <x-button href="#enquiry" variant="sponsor" class="shrink-0 md:mb-1">
                     Sponsor a child
                     <x-icon name="arrow-right" class="size-4" />
                 </x-button>
@@ -137,7 +162,9 @@
 
             <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($gifts as $gift)
-                    <article class="rounded-lg border border-line bg-surface p-6 shadow-card">
+                    <article class="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface p-6 text-ink shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-md">
+                        <span class="absolute inset-x-0 top-0 h-1 {{ $giftAccents[$loop->index % count($giftAccents)] }}" aria-hidden="true"></span>
+
                         <span class="inline-flex size-11 items-center justify-center rounded-lg {{ $gift['tone'] }}">
                             <x-icon :name="$gift['icon']" class="size-6" />
                         </span>
@@ -145,17 +172,6 @@
                         <p class="mt-2 text-sm leading-relaxed text-muted">{{ $gift['copy'] }}</p>
                     </article>
                 @endforeach
-            </div>
-
-            <div class="mt-8 rounded-lg border border-line bg-surface p-6 sm:p-8">
-                <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">Sponsorship details</p>
-                <p class="mt-2 max-w-3xl leading-relaxed text-ink">
-                    [ADD: monthly sponsorship amount, payment options and what the sponsorship covers.]
-                </p>
-                <p class="mt-2 text-sm leading-relaxed text-muted">
-                    HGCI does not display unverified amounts. The confirmed sponsorship details will be published here
-                    once supplied.
-                </p>
             </div>
         </div>
     </section>
@@ -178,14 +194,19 @@
 
             <div class="space-y-3">
                 @forelse ($faqs as $faq)
-                    <details class="group rounded-lg border border-line bg-surface p-5 shadow-card">
-                        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink [&::-webkit-details-marker]:hidden">
-                            <span>{{ $faq->question }}</span>
-                            <span class="shrink-0 text-brand-teal transition-transform group-open:rotate-180">
+                    <details class="group overflow-hidden rounded-lg border border-line bg-surface shadow-card transition-colors hover:border-brand-teal open:border-brand-teal">
+                        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                            <span class="flex items-start gap-3">
+                                <span class="mt-1.5 size-2 shrink-0 rounded-full bg-brand-teal" aria-hidden="true"></span>
+                                <span>{{ $faq->question }}</span>
+                            </span>
+                            <span class="shrink-0 rounded-md p-1 text-brand-teal transition-transform group-open:rotate-180">
                                 <x-icon name="chevron-down" class="size-5" />
                             </span>
                         </summary>
-                        <p class="mt-3 text-sm leading-relaxed text-muted">{{ $faq->answer }}</p>
+                        <div class="px-5 pb-5">
+                            <p class="border-t border-line pt-3 text-sm leading-relaxed text-muted">{{ $faq->answer }}</p>
+                        </div>
                     </details>
                 @empty
                     <div class="rounded-lg border border-dashed border-line bg-surface-warm p-6">
@@ -201,32 +222,58 @@
     </section>
 
     {{-- Sponsorship enquiry form. --}}
-    <section id="enquiry" class="scroll-mt-28 border-y border-line bg-surface-warm py-16 lg:py-24">
-        <div class="container-page grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-start">
+    @php
+        $enquiryImage = \App\Support\ImageSource::url('images/gallery/community-care/encouraging-a-child.jpeg', asset: true);
+    @endphp
+
+    <section id="enquiry" class="relative isolate overflow-hidden bg-ink py-16 text-white lg:py-24">
+        @if ($enquiryImage)
+            <img
+                src="{{ $enquiryImage }}"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover"
+            >
+            <div aria-hidden="true" class="absolute inset-0 bg-ink/85"></div>
+        @endif
+
+        <div class="container-page relative z-10 grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-start lg:gap-16">
             <div>
                 <x-section-heading
                     eyebrow="Sponsorship enquiry"
                     title="Tell us you would like to sponsor a child"
                     description="Complete the form and our team will contact you with the next steps. There is no payment on this page."
+                    tone="dark"
                 />
 
-                <div class="mt-7 space-y-4 text-sm leading-relaxed text-muted">
+                <div class="mt-7 space-y-4 text-sm leading-relaxed text-white/90">
                     <p class="flex items-start gap-3">
-                        <x-icon name="shield-check" class="mt-0.5 size-5 shrink-0 text-brand-teal" />
+                        <x-icon name="shield-check" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
                         <span>Your details are used only to respond to your enquiry.</span>
                     </p>
                     <p class="flex items-start gap-3">
-                        <x-icon name="phone" class="mt-0.5 size-5 shrink-0 text-brand-teal" />
-                        <span>Prefer to talk? Call [ADD: phone number].</span>
+                        <x-icon name="phone" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
+                        <span>Prefer to talk? Call +256702556778 +256777782661</span>
                     </p>
                     <p class="flex items-start gap-3">
-                        <x-icon name="envelope" class="mt-0.5 size-5 shrink-0 text-brand-teal" />
-                        <span>Email [ADD: email address].</span>
+                        <x-icon name="envelope" class="mt-0.5 size-5 shrink-0 text-brand-yellow" />
+                        <span>Email info@hopeingodci.org.</span>
                     </p>
                 </div>
             </div>
 
-            <div class="rounded-lg border border-line bg-surface p-6 shadow-card sm:p-8">
+            <div class="rounded-lg border border-line bg-surface p-6 text-ink shadow-card sm:p-8">
+                <div class="mb-6 flex items-center gap-3 border-b border-line pb-5">
+                    <span class="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-teal text-white">
+                        <x-icon name="heart" class="size-5" />
+                    </span>
+                    <div>
+                        <p class="font-display text-lg font-semibold leading-tight text-ink">Sponsorship enquiry</p>
+                        <p class="text-sm text-muted">Takes about two minutes.</p>
+                    </div>
+                </div>
+
                 <form method="POST" action="{{ route('sponsor.enquiry') }}" class="space-y-5">
                     @csrf
                     <x-form.honeypot />

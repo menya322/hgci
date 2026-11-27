@@ -394,9 +394,6 @@
                                 {{ $project->title }}
                             </a>
                         @endforeach
-                        <span class="inline-flex min-h-11 items-center rounded-md border border-dashed border-white/40 px-3 py-1.5 text-sm font-semibold text-white">
-                            [ADD: fourth project]
-                        </span>
                     </div>
                 </div>
             </div>

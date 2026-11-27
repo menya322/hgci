@@ -104,7 +104,7 @@
     </section>
 
     {{-- Ways to give. --}}
-    <section id="ways-to-give" class="scroll-mt-28 border-y border-line bg-surface-warm py-16 lg:py-24">
+    <section id="ways-to-give" class="border-y border-line bg-surface-warm py-16 lg:py-24">
         <div class="container-page">
             <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <x-section-heading
@@ -160,7 +160,7 @@
     </section>
 
     {{-- Donation pledge form. --}}
-    <section id="pledge" class="scroll-mt-28 py-16 lg:py-24">
+    <section id="pledge" class="py-16 lg:py-24">
         <div class="container-page grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-start">
             <div>
                 <x-section-heading
